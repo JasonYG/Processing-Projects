@@ -15,8 +15,6 @@ void drawMenu() {
   selectedTool(); //display the selected tool
   rectMode(CORNER);
   coolButton(); //creates rectangle for the "cool sketch"
-  saveWork(); //creates rectangle for save 
-  clearScreen(); //creates rectangle for clear screen
 }
 
 void thicknessSelector() {
@@ -135,25 +133,7 @@ void coolButton() {
   rect(0, menuY*0.75, menuX, menuY*0.1);
 
   fill(0);
-  if (screen == 1) {
-    text("Something cool!", menuX/2, menuY*0.8);
-  }
-  if (screen == 2) {
-    text("Go back", menuX/2, menuY*0.8);
-  }
-}
-void saveWork() {
-  fill(255);
-  rect(0, menuY*0.85, menuX*0.5, menuY*0.1);
 
-  fill(0);
-  text("Save", menuX*0.25, menuY*0.905);
-}
-void clearScreen() {
-  textMode(CENTER);
-  fill(255);
-  rect(0, menuY*0.95, menuX, menuY*0.1);
-
-  fill(0);
-  text("Clear screen", menuX*0.5, menuY*0.99);
+    text("Clear screen", menuX/2, menuY*0.8);
+  
 }

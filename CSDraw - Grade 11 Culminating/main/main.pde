@@ -38,7 +38,7 @@ void setup() {
   openingScreen = loadImage("openScreen.png");
   /* menu on the left */
   menuX = width/6; 
-  menuY = height;
+  menuY = height * 5/6;
 
   //size of the sliders
   thicknessX = (menuX*0.1 + menuX*0.9)/2;
@@ -73,7 +73,7 @@ void draw() {
 void keyPressed() {
   if (screen == 0) {
     screen++;
-    background(0);
+    background(255);
   }
 }
 void welcomeScreen() {
