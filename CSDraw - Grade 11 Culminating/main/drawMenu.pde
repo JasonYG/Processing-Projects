@@ -4,7 +4,7 @@ void drawMenu() {
   strokeWeight(5);
   fill(255);
   rectMode(CORNER);
-  rect(0, 0, menuX, menuY);
+  rect(0, 0, menuX, menuY*5/6);
 
   thicknessSelector(); //creates slider to change thickness of brush
   RGBSelector(); //creates slider to change colour of brush
@@ -14,7 +14,8 @@ void drawMenu() {
 
   selectedTool(); //display the selected tool
   rectMode(CORNER);
-  coolButton(); //creates rectangle for the "cool sketch"
+  clearScreen(); //creates rectangle for the "cool sketch"
+  authorInfo(); //information about the author
 }
 
 void thicknessSelector() {
@@ -49,7 +50,7 @@ void RGBSelector() {
   //green slider
   stroke(0, 255, 0);
   strokeWeight(5);
-  line(menuX*0.1, menuY/5, menuX*0.9, menuY/5);
+  line(menuX*0.1, greenY, menuX*0.9, greenY);
 
   stroke(0, greenValue, 0);
   fill(0, greenValue, 0);
@@ -127,13 +128,19 @@ void selectedTool() {
     text("Square brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
   }
 }
-void coolButton() {
+void clearScreen() {
   stroke(0);
   fill(255);
   rect(0, menuY*0.75, menuX, menuY*0.1);
 
   fill(0);
+  text("Clear screen", menuX/2, menuY*0.8);
+}
+void authorInfo() {
+  stroke(0);
+  fill(255);
+  rect(0, menuY*0.85, menuX, menuY*0.15);
 
-    text("Clear screen", menuX/2, menuY*0.8);
-  
+  fill(0);
+  text("Created by\n Jason Guo", menuX/2, menuY*0.9);
 }

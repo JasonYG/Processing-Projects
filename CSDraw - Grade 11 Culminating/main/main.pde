@@ -1,7 +1,8 @@
 int screen = 0;
 PImage openingScreen;
 
-int brushWeight = 30;
+float brushWeight = 35; //default brush size
+PaintBrush brush = new PaintBrush(mouseX, mouseY, brushWeight, color(0)); //default settings
 int switchBrush = 0; //brush 0 is the regular round brush
 
 //for the menus on the left
@@ -38,7 +39,7 @@ void setup() {
   openingScreen = loadImage("openScreen.png");
   /* menu on the left */
   menuX = width/6; 
-  menuY = height * 5/6;
+  menuY = height;
 
   //size of the sliders
   thicknessX = (menuX*0.1 + menuX*0.9)/2;
@@ -49,7 +50,7 @@ void setup() {
   redValue = 0;
 
   greenX = menuX*0.1;
-  greenY = menuY/5;
+  greenY = 1.25*menuY/6;
   greenValue = 0;
 
   blueX = menuX*0.1;
@@ -67,6 +68,7 @@ void draw() {
     break;
   case 1:
     drawMenu();
+    gameUI();
     break;
   }
 }
@@ -76,13 +78,70 @@ void keyPressed() {
     background(255);
   }
 }
+void mouseClicked() {
+  if (screen != 0) {
+    //changes to eraser
+    if (mouseButton == LEFT && switchBrush != 1) {
+      if (mouseX > menuX/2 - 95 && mouseX < menuX/2 + 95 && 
+        mouseY > menuY/3 && mouseY < menuY/2.5) {
+        switchBrush = 1;
+      }
+    }
+    //changes to brush
+    if (mouseButton == LEFT && switchBrush != 0) {
+      if (mouseX > menuX*0.2 && mouseX < menuX*0.8 && 
+        mouseY > menuY/2.3 && mouseY < (menuY/2.3) + (menuY*0.05)) {
+        switchBrush = 0;
+      }
+    }
+    //changes to square brush
+    if (mouseButton == LEFT && switchBrush != 2) {
+      if (mouseX > menuX*0.3 && mouseX < menuX*0.7 && 
+        mouseY > menuY/2 && mouseY < (menuY/2) + (menuX*0.4)) {
+        switchBrush = 2;
+        //  rect(menuX*0.3, menuY/2, menuX*0.4, menuX*0.4
+      }
+    }
+    //clear screen
+    if (mouseButton == LEFT) {
+      if (mouseX > 0 && mouseX < menuX && 
+        mouseY > menuY*0.75 && mouseY < (menuY*0.75) + (menuY*0.1)) {
+        background(255);
+      }
+    }
+    //link to github
+    if (mouseButton == LEFT) {
+      if (mouseX > 0 && mouseX < menuX && 
+        mouseY > menuY*0.85 && mouseY < menuY) {
+        link("https://github.com/JasonYG");
+      }
+    }
+  }
+}
+void mouseDragged() {
+  //checks if the mouse is not over the menu AND which brush is selected
+  if (screen != 0) {
+    if (mouseY > height/6) {
+      //regular brush
+      if (mouseButton == LEFT && screen == 1 && switchBrush == 0 && 
+        mouseX > menuX) {
+        brush.circleDisplay();
+      }
+      //square brush
+      if (mouseButton == LEFT && screen == 1 && switchBrush == 2 && 
+        mouseX > menuX) {
+        brush.squareDisplay();
+      }
+      //eraser
+      if (mouseButton == LEFT && switchBrush == 1 && mouseX > menuX) {
+        brush.erase();
+      }
+    }
+  }
+  sliders(); //allows the sliders to be moved by the mouse
+}
 void welcomeScreen() {
   background(255);
   imageMode(CENTER);
   image(openingScreen, width/2, height/2);
-}
-void paintScreen() {
-  background(255);
-  fill(0);
-  text("yo", width/2, height/2);
 }
