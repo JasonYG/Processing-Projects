@@ -1,21 +1,29 @@
-float score = pow(600000,10);
+float score = 0;
+String objective = "FLOWER"; //what the user has to draw
 void gameUI() {
   fill(255);
   rect(menuX, 0, width-menuX, height/6);
-  
+
+  //score
   fill(0);
   textAlign(CENTER);
-  text("Score\n" + (int)score, width*0.2, 0.9*height/12);
-  
-  //score
+  textSize(50);
+  text("Score: " + (int)score, (width+menuX)*0.22, 1.1*height/12);
+
+  //title
+  fill(0);
+  textAlign(CENTER);
+  textSize(100);
+  text(objective, (menuX+width)/2, 1.3*height/12);
+
   //timer
   fill(0);
   textAlign(CENTER);
   textSize(100);
-  text(60 - millis()/1000, width*0.95, 1.3*height/12);
-  
+  text(60 + (int)currentTime/1000 - (int)millis()/1000, (width+menuX)*0.8, 1.3*height/12);
+
   //out of time
-  if (60 - millis()/1000 == 0) {
+  if (60 + (int)currentTime/1000 + (int)millis()/1000 == 0) {
     screen = 2;
   }
 }

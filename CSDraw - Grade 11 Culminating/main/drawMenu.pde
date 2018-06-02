@@ -15,7 +15,7 @@ void drawMenu() {
   selectedTool(); //display the selected tool
   rectMode(CORNER);
   clearScreen(); //creates rectangle for the "cool sketch"
-  authorInfo(); //information about the author
+  nextDrawing(); //switches to next drawing
 }
 
 void thicknessSelector() {
@@ -136,11 +136,11 @@ void clearScreen() {
   fill(0);
   text("Clear screen", menuX/2, menuY*0.8);
 }
-void authorInfo() {
+void nextDrawing() {
   stroke(0);
   fill(255);
   rect(0, menuY*0.85, menuX, menuY*0.15);
 
   fill(0);
-  text("Created by\n Jason Guo", menuX/2, menuY*0.9);
+  text("NEXT DRAWING", menuX/2, menuY*0.92);
 }

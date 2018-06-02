@@ -32,6 +32,8 @@ float opacityX;
 float opacityY;
 float opacityR = blueR;
 float opacityValue;
+
+float currentTime;
 void settings() {
   fullScreen();
 }
@@ -75,6 +77,7 @@ void draw() {
 void keyPressed() {
   if (screen == 0) {
     screen++;
+    currentTime = millis();
     background(255);
   }
 }
@@ -109,11 +112,12 @@ void mouseClicked() {
         background(255);
       }
     }
-    //link to github
+    //switches to the next drawing
     if (mouseButton == LEFT) {
       if (mouseX > 0 && mouseX < menuX && 
         mouseY > menuY*0.85 && mouseY < menuY) {
-        link("https://github.com/JasonYG");
+        score += 100;
+        objective = "CAT";
       }
     }
   }
