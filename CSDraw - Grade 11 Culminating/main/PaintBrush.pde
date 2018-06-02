@@ -1,4 +1,10 @@
-/* creates a class for paint brush tool */
+/** 
+ * class for paint brush tool 
+ * 
+ * @author Jason Guo
+ * @since June 2, 2018
+ * @version 1.0
+ */
 public class PaintBrush {
   float xPos, yPos, size;
   color colour;
@@ -8,7 +14,9 @@ public class PaintBrush {
     size = s; //size, diameter or width/height of the brush
     colour = c; //colour
   }
-  //to display a rounded line
+  /**
+   * Displays a rounded brush
+   */
   void circleDisplay() {
     //updates the paintbrush's x and y value to follow the mouse
     xPos = mouseX; 
@@ -18,7 +26,9 @@ public class PaintBrush {
     fill(colour);
     line(pmouseX, pmouseY, xPos, yPos);
   }
-  //to display squares
+  /**
+   * Displays a square brush
+   */
   void squareDisplay() {
     xPos = mouseX;
     yPos = mouseY;
@@ -26,7 +36,9 @@ public class PaintBrush {
     fill(colour);
     rect(xPos, yPos, size, size);
   }
-  //changes the brush to be white, thus "erasing"
+  /**
+   * Switches brush to erase
+   */
   void erase() {
     strokeWeight(size);
     stroke(255);
