@@ -34,6 +34,7 @@ float opacityR = blueR;
 float opacityValue;
 
 float currentTime;
+import java.net.URL;
 void settings() {
   fullScreen();
 }
@@ -66,7 +67,13 @@ void setup() {
 void draw() {
   switch(screen) {
   case 0:
-    welcomeScreen();
+   String TARGETURL = 
+  "https://vision.googleapis.com/v1/images:annotate?";
+  String KEY = "AIzaSyCVeCZ_Y6M7nRuzPQ6w3tae6j_xS7xSocY";
+  try {
+  URL serverUrl = new URL(TARGETURL + KEY);
+  }
+    //welcomeScreen();
     break;
   case 1:
     drawMenu();
