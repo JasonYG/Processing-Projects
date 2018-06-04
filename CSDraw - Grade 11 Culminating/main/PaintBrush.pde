@@ -1,8 +1,8 @@
 /** 
- * class for paint brush tool 
+ * This class is used for the paint brush tool 
  * 
  * @author Jason Guo
- * @since June 2, 2018
+ * @since June 4, 2018
  * @version 1.0
  */
 public class PaintBrush {
