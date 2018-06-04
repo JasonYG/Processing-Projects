@@ -116,8 +116,13 @@ void mouseClicked() {
     if (mouseButton == LEFT) {
       if (mouseX > 0 && mouseX < menuX && 
         mouseY > menuY*0.85 && mouseY < menuY) {
-        score += 100;
-        objective = "CAT";
+        //saves the picture
+        PImage saveScreen = get(int(menuX)+5, int(height/6), int(width-menuX)-5, int(height-height/6));
+        saveScreen.save("sketch.jpg");
+        
+        //clears screen
+        background(255);
+       
       }
     }
   }
