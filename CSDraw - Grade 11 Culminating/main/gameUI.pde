@@ -1,5 +1,3 @@
-float score = 0;
-String objective = "FLOWER"; //what the user has to draw
 void gameUI() {
   fill(255);
   rect(menuX, 0, width-menuX, height/6);
@@ -8,13 +6,13 @@ void gameUI() {
   fill(0);
   textAlign(CENTER);
   textSize(50);
-  text("Score: " + (int)score, (width+menuX)*0.22, 1.1*height/12);
+  text("Score: " + (int)ImageProcess.score, (width+menuX)*0.22, 1.1*height/12);
 
   //title
   fill(0);
   textAlign(CENTER);
   textSize(100);
-  text(objective, (menuX+width)/2, 1.3*height/12);
+  text(ImageProcess.objective, (menuX+width)/2, 1.3*height/12);
 
   //timer
   fill(0);

@@ -34,15 +34,10 @@ float opacityR = blueR;
 float opacityValue;
 
 float currentTime;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.HttpURLConnection;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.util.Scanner;
-//import com.google.http.client;
+
 void settings() {
   fullScreen();
+  //size(50, 50);
 }
 void setup() {
   openingScreen = loadImage("openScreen.png");
@@ -73,50 +68,7 @@ void setup() {
 void draw() {
   switch(screen) {
   case 0:
-    String TARGETURL = 
-      "https://vision.googleapis.com/v1/images:annotate?";
-    String KEY = "key=AIzaSyDDC0pAD50g0eJVViG7LmISflq83aTPSDk";
-    URL serverUrl;
-    try {
-      serverUrl = new URL(TARGETURL + KEY);
-      URLConnection urlConnection = serverUrl.openConnection();
-      HttpURLConnection httpConnection = (HttpURLConnection)urlConnection;
-      httpConnection.setRequestMethod("POST");
-      httpConnection.setRequestProperty("Content-Type", "application/json");
-      httpConnection.setDoOutput(true);
-      BufferedWriter httpRequestBodyWriter = new BufferedWriter(new
-        OutputStreamWriter(httpConnection.getOutputStream()));
-      httpRequestBodyWriter.write
-        ("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\""
-        +"}], \"image\": {\"source\": { \"gcsImageUri\":"
-        +" \"gs://vision-sample-images/4_Kittens.jpg\"}}}]}");
-      httpRequestBodyWriter.close();
-      String response = httpConnection.getResponseMessage();
-      println(response);
-      noLoop();
-      
-      if (httpConnection.getInputStream() == null) {
-        System.out.println("No stream");
-        return;
-      }
-
-      Scanner httpResponseScanner = new Scanner (httpConnection.getInputStream());
-      String resp = "";
-      while (httpResponseScanner.hasNext()) {
-        String line = httpResponseScanner.nextLine();
-        resp += line;
-        System.out.println(line);  //  alternatively, print the line of response
-        noLoop();
-      }
-      httpResponseScanner.close();
-      noLoop();
-    }  
-    catch(Exception e) {
-      e.printStackTrace();
-    }
-
-
-    //welcomeScreen();
+    welcomeScreen();
     break;
   case 1:
     drawMenu();
@@ -169,7 +121,8 @@ void mouseClicked() {
         //saves the picture
         PImage saveScreen = get(int(menuX)+5, int(height/6), int(width-menuX)-5, int(height-height/6));
         saveScreen.save("sketch.jpg");
-
+        //calls API
+        ImageProcess.analyzeImage(ImageProcess.encode(loadBytes("sketch.jpg")));
         //clears screen
         background(255);
       }
