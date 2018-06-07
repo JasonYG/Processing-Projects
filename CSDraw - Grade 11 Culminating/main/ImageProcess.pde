@@ -28,12 +28,12 @@ public static class ImageProcess {
   /**
    * The user's score
    */
-   public static int score = 0;
+  public static float score = 0;
   /**
    * What the user must draw next
    */
-   public static String objective = "FLOWER";
-   
+  public static String objective = "FLOWER";
+
   /**
    * Encodes a byte[] into a base64 string
    *
@@ -64,15 +64,10 @@ public static class ImageProcess {
       httpConnection.setDoOutput(true);
       BufferedWriter httpRequestBodyWriter = new BufferedWriter(new
         OutputStreamWriter(httpConnection.getOutputStream()));
-      //httpRequestBodyWriter.write
-      //  ("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\""
-      //  +"}], \"image\": {\"source\": { \"gcsImageUri\":"
-      //  +" \"gs://vision-sample-images/4_Kittens.jpg\"}}}]}");
-        httpRequestBodyWriter.write
-           ("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\""
-         +"}], \"image\": {\"content\":  \"" + encodedImage + "\"}}]}");
+      httpRequestBodyWriter.write
+        ("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\""
+        +"}], \"image\": {\"content\":  \"" + encodedImage + "\"}}]}");
       httpRequestBodyWriter.close();
-
 
       if (httpConnection.getInputStream() == null) {
         System.out.println("No stream");
@@ -80,11 +75,19 @@ public static class ImageProcess {
       }
 
       Scanner httpResponseScanner = new Scanner (httpConnection.getInputStream());
-      String resp = "";
       while (httpResponseScanner.hasNext()) {
+        //adds to the user's score
         String line = httpResponseScanner.nextLine();
-        resp += line;
-        System.out.println(line);  //alternatively, print the line of response
+        if (line.contains(objective.toLowerCase())) {
+          String addScore = httpResponseScanner.nextLine();
+          addScore = addScore.split("\"score\"")[1];
+          addScore = addScore.split(",")[0];
+          addScore = addScore.split(": ")[1];
+          score += Float.valueOf(addScore) * 100;
+          break; 
+        }
+        score -= 50;
+        println(score);
       }
       httpResponseScanner.close();
     }  

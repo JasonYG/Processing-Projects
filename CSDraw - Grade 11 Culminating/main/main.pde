@@ -83,7 +83,7 @@ void keyPressed() {
     background(255);
   }
 }
-void mouseClicked() {
+void mousePressed() {
   if (screen != 0) {
     //changes to eraser
     if (mouseButton == LEFT && switchBrush != 1) {
