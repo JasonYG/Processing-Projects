@@ -80,6 +80,7 @@ void keyPressed() {
   if (screen == 0) {
     screen++;
     currentTime = millis();
+    ImageProcess.changeObjective();
     background(255);
   }
 }
@@ -123,7 +124,7 @@ void mousePressed() {
         saveScreen.save("sketch.jpg");
         //calls API
         ImageProcess.analyzeImage(ImageProcess.encode(loadBytes("sketch.jpg")));
-        //clears screen
+        ImageProcess.changeObjective();
         background(255);
       }
     }

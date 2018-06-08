@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.Scanner;
 import java.util.Base64;
+import java.util.Random;
 /** 
  * This class converts an image to a base64-encoded string
  *
@@ -29,10 +30,22 @@ public static class ImageProcess {
    * The user's score
    */
   public static float score = 0;
+
   /**
    * What the user must draw next
    */
-  public static String objective = "FLOWER";
+  public static String objective;
+
+  /**
+   * The choices that the objective could be
+   */
+  public static ArrayList<String> objectiveChoices = new ArrayList<String>() {
+    {
+      add("FLOWER");
+      add("HAND");
+      add("INSECT");
+    }
+  };
 
   /**
    * Encodes a byte[] into a base64 string
@@ -78,21 +91,33 @@ public static class ImageProcess {
       while (httpResponseScanner.hasNext()) {
         //adds to the user's score
         String line = httpResponseScanner.nextLine();
+        println(line);
         if (line.contains(objective.toLowerCase())) {
           String addScore = httpResponseScanner.nextLine();
           addScore = addScore.split("\"score\"")[1];
           addScore = addScore.split(",")[0];
           addScore = addScore.split(": ")[1];
           score += Float.valueOf(addScore) * 100;
-          break; 
+          httpResponseScanner.close();
+          return;
         }
-        score -= 50;
-        println(score);
       }
+      score -= 50;
       httpResponseScanner.close();
+      return;
     }  
     catch(Exception e) {
       e.printStackTrace();
     }
+  } 
+  /**
+   * Randomly changes the objective
+   */
+  static void changeObjective() {
+    Random generateRandomNumber = new Random();
+    if (objectiveChoices.size() == 0) return;
+    int randomNumber = generateRandomNumber.nextInt(objectiveChoices.size());
+    objective = objectiveChoices.get(randomNumber);
+    objectiveChoices.remove(objective);
   }
-}
+}   
