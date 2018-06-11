@@ -44,6 +44,14 @@ public static class ImageProcess {
       add("FLOWER");
       add("HAND");
       add("INSECT");
+      add("CAT");
+      add("APPLE");
+      add("DUCK");
+      add("BALLOON");
+      add("BICYCLE");
+      add("PENGUIN");
+      add("TREE");
+      add("HEART");
     }
   };
 
