@@ -9,6 +9,10 @@ import java.util.Random;
 /** 
  * This class converts an image to a base64-encoded string
  *
+ * In order for this class to work properly, there must be a text file
+ * called "API_KEY.txt" in the same directory as this file. Inside the text
+ * file must be a valid API key for the Google Cloud Vision API.
+ *
  * @author Jason Guo
  * @since June 6, 2018
  * @version 1.0
@@ -19,12 +23,6 @@ public static class ImageProcess {
    */
   private static final String TARGET_URL = 
     "https://vision.googleapis.com/v1/images:annotate?";
-
-  /**
-   * The API key for authentication
-   */
-  private static final String API_KEY = 
-    "key=AIzaSyDDC0pAD50g0eJVViG7LmISflq83aTPSDk";
 
   /**
    * The user's score
@@ -75,7 +73,7 @@ public static class ImageProcess {
    *
    * @param encodedImage The base64 encoded image 
    */
-  static void analyzeImage(String encodedImage) {
+  static void analyzeImage(String encodedImage, String API_KEY) {
     URL serverUrl;
     try {
       serverUrl = new URL(TARGET_URL + API_KEY);
@@ -100,7 +98,6 @@ public static class ImageProcess {
       while (httpResponseScanner.hasNext()) {
         //adds to the user's score
         String line = httpResponseScanner.nextLine();
-        println(line);
         if (line.contains(objective.toLowerCase())) {
           String addScore = httpResponseScanner.nextLine();
           addScore = addScore.split("\"score\"")[1];

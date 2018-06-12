@@ -87,8 +87,8 @@ void keyPressed() {
     background(255);
   }
   if (screen == 2) {
-   screen = 0;
-   ImageProcess.score = 0;
+    screen = 0;
+    ImageProcess.score = 0;
   }
 }
 void mousePressed() {
@@ -130,7 +130,8 @@ void mousePressed() {
         PImage saveScreen = get(int(menuX)+5, int(height/6), int(width-menuX)-5, int(height-height/6));
         saveScreen.save("sketch.jpg");
         //calls API
-        ImageProcess.analyzeImage(ImageProcess.encode(loadBytes("sketch.jpg")));
+        ImageProcess.analyzeImage(ImageProcess.encode(loadBytes("sketch.jpg")), 
+          "key=" + loadStrings("API_KEY.txt")[0]);
         ImageProcess.changeObjective();
         background(255);
       }
