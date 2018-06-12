@@ -74,6 +74,9 @@ void draw() {
     drawMenu();
     gameUI();
     break;
+  case 2:
+    endScreen();
+    break;
   }
 }
 void keyPressed() {
@@ -82,6 +85,10 @@ void keyPressed() {
     currentTime = millis();
     ImageProcess.changeObjective();
     background(255);
+  }
+  if (screen == 2) {
+   screen = 0;
+   ImageProcess.score = 0;
   }
 }
 void mousePressed() {
@@ -156,4 +163,12 @@ void welcomeScreen() {
   background(255);
   imageMode(CENTER);
   image(openingScreen, width/2, height/2);
+}
+void endScreen() {
+  background(255);
+  imageMode(CENTER);
+  textSize(100);
+  text("Your final score is " + (int)ImageProcess.score, width/2, height/2);
+  textSize(50);
+  text("Press any key to play again.", width/2, height*0.75);
 }

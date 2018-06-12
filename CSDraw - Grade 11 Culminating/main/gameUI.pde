@@ -21,7 +21,7 @@ void gameUI() {
   text(60 + (int)currentTime/1000 - (int)millis()/1000, (width+menuX)*0.8, 1.3*height/12);
 
   //out of time
-  if (60 + (int)currentTime/1000 + (int)millis()/1000 == 0) {
+  if (60 + (int)currentTime/1000 - (int)millis()/1000 < 50) {
     screen = 2;
   }
 }

@@ -52,6 +52,7 @@ public static class ImageProcess {
       add("PENGUIN");
       add("TREE");
       add("HEART");
+      
     }
   };
 
@@ -110,7 +111,7 @@ public static class ImageProcess {
           return;
         }
       }
-      score -= 50;
+      score -= 20;
       httpResponseScanner.close();
       return;
     }  
