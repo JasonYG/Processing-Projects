@@ -6,14 +6,9 @@
  * @version 1.0
  */
 public class PaintBrush {
-  float xPos, yPos, size;
+  float xPos, yPos;
+  float size = 35;
   color colour;
-  PaintBrush(float x, float y, float s, color c) {
-    xPos = x;  //x coordinate
-    yPos = y; //y coordinate
-    size = s; //size, diameter or width/height of the brush
-    colour = c; //colour
-  }
   /**
    * Displays a rounded brush
    */
@@ -42,6 +37,26 @@ public class PaintBrush {
   void erase() {
     strokeWeight(size);
     stroke(255);
-    line(pmouseX, pmouseY, mouseX, mouseY); 
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+  /* 
+   * Updates the thickness or size of the brush
+   *
+   * @param weight The desired thickness of the brush
+   */
+  //updates the thickness or size of the brush
+  void changeWeight(float weight) {
+   size = weight;
+  }
+  /*
+   * Updates the colour of the brush
+   *
+   * @param redValue The new red value of the brush
+   * @param greenValue The new green value of the brush
+   * @param blueValue The new blue value of the brush
+   * @param opacityValue The new opacity value of the brush
+   */
+  void changeColour(float redValue, float greenValue, float blueValue, float opacityValue) {
+    colour = color(redValue, greenValue, blueValue, opacityValue);
   }
 }
