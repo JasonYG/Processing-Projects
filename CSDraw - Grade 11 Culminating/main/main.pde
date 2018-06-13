@@ -34,6 +34,7 @@ void keyPressed() {
   if (screen == 0) {
     screen++;
     currentTime = millis();
+    ImageProcess.resetObjectives();
     ImageProcess.changeObjective();
     background(255);
   }

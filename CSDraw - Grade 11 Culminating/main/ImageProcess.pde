@@ -37,32 +37,8 @@ public static class ImageProcess {
   /**
    * The choices that the objective could be
    */
-  public static ArrayList<String> objectiveChoices = new ArrayList<String>() {
-    {
-      add("FLOWER");
-      add("HAND");
-      add("INSECT");
-      add("CAT");
-      add("APPLE");
-      add("DUCK");
-      add("BALLOON");
-      add("BICYCLE");
-      add("PENGUIN");
-      add("TREE");
-      add("HEART");
-      
-    }
-  };
+  public static ArrayList<String> objectiveChoices = new ArrayList<String>();
 
-  /**
-   * Encodes a byte[] into a base64 string
-   *
-   * @param imageBytes The byte[] to be encoded
-   * @return the encoded string
-   */
-  static String encode(byte[] imageBytes) {
-    return Base64.getEncoder().encodeToString(imageBytes);
-  }
   /**
    * Makes a request to the Cloud Vision API for image analysis
    *
@@ -115,7 +91,7 @@ public static class ImageProcess {
     catch(Exception e) {
       e.printStackTrace();
     }
-  } 
+  }
   /**
    * Randomly changes the objective
    */
@@ -125,5 +101,31 @@ public static class ImageProcess {
     int randomNumber = generateRandomNumber.nextInt(objectiveChoices.size());
     objective = objectiveChoices.get(randomNumber);
     objectiveChoices.remove(objective);
+  }
+  /**
+   * Encodes a byte[] into a base64 string
+   *
+   * @param imageBytes The byte[] to be encoded
+   * @return the encoded string
+   */
+  static String encode(byte[] imageBytes) {
+    return Base64.getEncoder().encodeToString(imageBytes);
+  } 
+  /**
+   * Resets the objective choices
+   */
+  static void resetObjectives() {
+    objectiveChoices.clear();
+    objectiveChoices.add("FLOWER");
+    objectiveChoices.add("HAND");
+    objectiveChoices.add("INSECT");
+    objectiveChoices.add("CAT");
+    objectiveChoices.add("APPLE");
+    objectiveChoices.add("DUCK");
+    objectiveChoices.add("BALLOON");
+    objectiveChoices.add("BICYCLE");
+    objectiveChoices.add("PENGUIN");
+    objectiveChoices.add("TREE");
+    objectiveChoices.add("HEART");
   }
 }   

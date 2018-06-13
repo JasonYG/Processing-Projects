@@ -7,10 +7,9 @@
  */
 public class GameInterface {
   float brushWeight = 35;
-  float menuX, menuY, thicknessX, thicknessY, redX, redY, redR, redValue,
-    greenX, greenY, greenR, greenValue, blueX, blueY, blueR, blueValue, opacityX,
+  float menuX, menuY, thicknessX, thicknessY, redX, redY, redR, redValue, 
+    greenX, greenY, greenR, greenValue, blueX, blueY, blueR, blueValue, opacityX, 
     opacityY, opacityR, opacityValue;
-
   /*
    * Constructor for the interface
    *
@@ -43,6 +42,29 @@ public class GameInterface {
     opacityY = blueY + opacityR + 10;
     opacityValue = 255;
   }
+  /*
+   * Displays the brush element of the UI
+   */
+  void brush() {
+    fill(255);
+    stroke(0);
+    rect(menuX*0.2, menuY/2.3, menuX*0.6, menuY*0.05);
+
+    fill(0); 
+    textMode(CENTER);
+    text("Brush", menuX/2, menuY/2.15);
+  }
+  /*
+   * Displays the clear screen element of the UI
+   */
+  void clearScreen() {
+    stroke(0);
+    fill(255);
+    rect(0, menuY*0.75, menuX, menuY*0.1);
+
+    fill(0);
+    text("Clear screen", menuX/2, menuY*0.8);
+  }
   /* 
    * Draws menu on the left of the screen 
    */
@@ -63,6 +85,26 @@ public class GameInterface {
     rectMode(CORNER);
     clearScreen(); //creates rectangle for the "cool sketch"
     nextDrawing(); //switches to next drawing
+  }
+  /* 
+   * Displays the eraser element of the UI
+   */
+  void eraser() {
+    strokeJoin(ROUND);
+    stroke(0);
+    fill(255, 181, 187);
+
+    beginShape();
+    vertex(menuX/2 - 75, menuY/3);
+    vertex(menuX/2 - 95, menuY/2.5);
+    vertex(menuX/2 + 75, menuY/2.5);
+    vertex(menuX/2 + 95, menuY/3);
+    vertex(menuX/2 - 75, menuY/3);
+    endShape();
+
+    fill(0);
+    textAlign(CENTER);
+    text("Eraser", menuX/2, menuY/2.75);
   }
   /*
    * Draws the top portion of the UI
@@ -95,21 +137,81 @@ public class GameInterface {
     }
   }
   /*
-   * Creates the thickness slider
+   * Displays the next drawing element of the UI
    */
-  void thicknessSelector() {
-    textSize(32);
+  void nextDrawing() {
+    stroke(0);
+    fill(255);
+    rect(0, menuY*0.85, menuX, menuY*0.15);
+
+    fill(0);
+    text("NEXT DRAWING", menuX/2, menuY*0.92);
+  }
+  /*
+   * Creates the colour selectors
+   */
+  void RGBSelector() {
     fill(0);
     textAlign(CENTER);
-    text("Thickness Selector", menuX/2, menuY/32);
+    text("Colour Selector", menuX/2, menuY/8);
 
-    stroke(0);
+    //red slider
+    stroke(255, 0, 0);
     strokeWeight(5);
-    line(menuX*0.1, menuY/16, menuX*0.9, menuY/16);
+    line(menuX*0.1, menuY/6, menuX*0.9, menuY/6);
 
-    stroke(redValue, greenValue, blueValue, opacityValue);
-    fill(redValue, greenValue, blueValue, opacityValue);
-    ellipse(thicknessX, thicknessY, brushWeight, brushWeight);
+    stroke(redValue, 0, 0);
+    fill(redValue, 0, 0);
+    ellipse(redX, redY, redR, redR);
+
+    //green slider
+    stroke(0, 255, 0);
+    strokeWeight(5);
+    line(menuX*0.1, greenY, menuX*0.9, greenY);
+
+    stroke(0, greenValue, 0);
+    fill(0, greenValue, 0);
+    ellipse(greenX, greenY, greenR, greenR);
+
+    //blue slider
+    stroke(0, 0, 255);
+    strokeWeight(5);
+    line(menuX*0.1, blueY, menuX*0.9, blueY);
+
+    stroke(0, 0, blueValue);
+    fill(0, 0, blueValue);
+    ellipse(blueX, blueY, blueR, blueR);
+
+    //opacity slider
+    stroke(0, 0, 0, opacityValue);
+    strokeWeight(5);
+    line(menuX*0.1, opacityY, menuX*0.9, opacityY);
+
+    noStroke();
+    fill(0, 0, 0, opacityValue);
+    ellipse(opacityX, opacityY, opacityR, opacityR);
+  }
+  /*
+   * Displays the tool that is currently selected
+   */
+  void selectedTool() {
+
+    //draws invisible rectangle for the tool selected info
+    noFill();
+    noStroke();
+    rect(0, menuY*0.65, menuX, menuY*0.1);
+
+    fill(0);
+    if (screen == 2) {
+      text("Cool sketch", menuX/2, menuY*0.7);
+    } else if (switchBrush == 0) {
+      rectMode(CENTER);
+      text("Round brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+    } else if (switchBrush == 1) {
+      text("Eraser selected", menuX/2, menuY*0.7);
+    } else if (switchBrush == 2) {
+      text("Square brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+    }
   }
   /*
    * Allows each slider to be moved 
@@ -157,82 +259,6 @@ public class GameInterface {
     }
   }
   /*
-   * Creates the colour selectors
-   */
-  void RGBSelector() {
-    fill(0);
-    textAlign(CENTER);
-    text("Colour Selector", menuX/2, menuY/8);
-
-    //red slider
-    stroke(255, 0, 0);
-    strokeWeight(5);
-    line(menuX*0.1, menuY/6, menuX*0.9, menuY/6);
-
-    stroke(redValue, 0, 0);
-    fill(redValue, 0, 0);
-    ellipse(redX, redY, redR, redR);
-
-    //green slider
-    stroke(0, 255, 0);
-    strokeWeight(5);
-    line(menuX*0.1, greenY, menuX*0.9, greenY);
-
-    stroke(0, greenValue, 0);
-    fill(0, greenValue, 0);
-    ellipse(greenX, greenY, greenR, greenR);
-
-    //blue slider
-    stroke(0, 0, 255);
-    strokeWeight(5);
-    line(menuX*0.1, blueY, menuX*0.9, blueY);
-
-    stroke(0, 0, blueValue);
-    fill(0, 0, blueValue);
-    ellipse(blueX, blueY, blueR, blueR);
-
-    //opacity slider
-    stroke(0, 0, 0, opacityValue);
-    strokeWeight(5);
-    line(menuX*0.1, opacityY, menuX*0.9, opacityY);
-
-    noStroke();
-    fill(0, 0, 0, opacityValue);
-    ellipse(opacityX, opacityY, opacityR, opacityR);
-  }
-  /* 
-   * Displays the eraser element of the UI
-   */
-  void eraser() {
-    strokeJoin(ROUND);
-    stroke(0);
-    fill(255, 181, 187);
-
-    beginShape();
-    vertex(menuX/2 - 75, menuY/3);
-    vertex(menuX/2 - 95, menuY/2.5);
-    vertex(menuX/2 + 75, menuY/2.5);
-    vertex(menuX/2 + 95, menuY/3);
-    vertex(menuX/2 - 75, menuY/3);
-    endShape();
-
-    fill(0);
-    textAlign(CENTER);
-    text("Eraser", menuX/2, menuY/2.75);
-  }
-  /*
-   * Displays the brush element of the UI
-   */
-  void brush() {
-    fill(255);
-    stroke(0);
-    rect(menuX*0.2, menuY/2.3, menuX*0.6, menuY*0.05);
-
-    fill(0); 
-    textMode(CENTER);
-    text("Brush", menuX/2, menuY/2.15);
-  }
-  /*
    * Displays the square brush element of the UI
    */
   void squareBrush() {
@@ -245,47 +271,20 @@ public class GameInterface {
     text("Square brush", menuX*0.5, menuY*0.58, menuX*0.4, menuX*0.4);
   }
   /*
-   * Displays the tool that is currently selected
+   * Creates the thickness slider
    */
-  void selectedTool() {
-
-    //draws invisible rectangle for the tool selected info
-    noFill();
-    noStroke();
-    rect(0, menuY*0.65, menuX, menuY*0.1);
-
+  void thicknessSelector() {
+    textSize(32);
     fill(0);
-    if (screen == 2) {
-      text("Cool sketch", menuX/2, menuY*0.7);
-    } else if (switchBrush == 0) {
-      rectMode(CENTER);
-      text("Round brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
-    } else if (switchBrush == 1) {
-      text("Eraser selected", menuX/2, menuY*0.7);
-    } else if (switchBrush == 2) {
-      text("Square brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
-    }
-  }
-  /*
-   * Displays the clear screen element of the UI
-   */
-  void clearScreen() {
+    textAlign(CENTER);
+    text("Thickness Selector", menuX/2, menuY/32);
+
     stroke(0);
-    fill(255);
-    rect(0, menuY*0.75, menuX, menuY*0.1);
+    strokeWeight(5);
+    line(menuX*0.1, menuY/16, menuX*0.9, menuY/16);
 
-    fill(0);
-    text("Clear screen", menuX/2, menuY*0.8);
-  }
-  /*
-   * Displays the next drawing element of the UI
-   */
-  void nextDrawing() {
-    stroke(0);
-    fill(255);
-    rect(0, menuY*0.85, menuX, menuY*0.15);
-
-    fill(0);
-    text("NEXT DRAWING", menuX/2, menuY*0.92);
+    stroke(redValue, greenValue, blueValue, opacityValue);
+    fill(redValue, greenValue, blueValue, opacityValue);
+    ellipse(thicknessX, thicknessY, brushWeight, brushWeight);
   }
 }
