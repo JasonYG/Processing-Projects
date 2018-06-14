@@ -79,7 +79,7 @@ public class GameInterface {
     RGBSelector(); //creates slider to change colour of brush
     eraser(); //creates parallelogram for eraser
     brush(); //creates rectangle for brush
-    squareBrush(); //creates square for square brush
+    bucketTool(); //creates square for bucket tool
 
     selectedTool(); //display the selected tool
     rectMode(CORNER);
@@ -206,11 +206,11 @@ public class GameInterface {
       text("Cool sketch", menuX/2, menuY*0.7);
     } else if (switchBrush == 0) {
       rectMode(CENTER);
-      text("Round brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+      text("Brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
     } else if (switchBrush == 1) {
       text("Eraser selected", menuX/2, menuY*0.7);
     } else if (switchBrush == 2) {
-      text("Square brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+      text("Bucket tool selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
     }
   }
   /*
@@ -259,16 +259,16 @@ public class GameInterface {
     }
   }
   /*
-   * Displays the square brush element of the UI
+   * Displays the bucket tool element of the UI
    */
-  void squareBrush() {
+  void bucketTool() {
     fill(255);
     stroke(0);
     rect(menuX*0.3, menuY/2, menuX*0.4, menuX*0.4);
 
     fill(0);
     rectMode(CENTER);
-    text("Square brush", menuX*0.5, menuY*0.58, menuX*0.4, menuX*0.4);
+    text("Bucket tool", menuX*0.5, menuY*0.58, menuX*0.4, menuX*0.4);
   }
   /*
    * Creates the thickness slider

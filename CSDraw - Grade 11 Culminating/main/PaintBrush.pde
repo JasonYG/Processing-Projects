@@ -8,7 +8,7 @@
 public class PaintBrush {
   float xPos, yPos;
   float size = 35;
-  color colour;
+  color colour = color(0, 0, 0);
   /**
    * Displays a rounded brush
    */
@@ -22,14 +22,74 @@ public class PaintBrush {
     line(pmouseX, pmouseY, xPos, yPos);
   }
   /**
-   * Displays a square brush
+   * Uses the bucket tool
+   *
+   * This method is similar to a flood fill algorithm,
+   * in that it checks whether the adjacent pixels are
+   * the same colour. If they are, then they are added to 
+   * to a queue. Each pixel in the queue is "visited", and
+   * the algorithm stops when the queue is empty.
    */
-  void squareDisplay() {
-    xPos = mouseX;
-    yPos = mouseY;
-    noStroke();
-    fill(colour);
-    rect(xPos, yPos, size, size);
+  void bucketDisplay() {
+    loadPixels();
+    boolean[] visitedPixels = new boolean[width*height];
+    ArrayList<Integer> pixelQueue = new ArrayList<Integer>();
+    color initialColor = pixels[mouseX + mouseY*width];
+    //if the bucket tool is used on a pixel of the same colour
+    if (initialColor == colour) {
+      return;
+    }
+    pixelQueue.add(mouseX + mouseY*width);
+
+    while (!pixelQueue.isEmpty()) {
+      int currentCoordinate = pixelQueue.get(0);
+
+      //checks if the currentCoordinate has already been visited
+      if (visitedPixels[currentCoordinate]) {
+        pixelQueue.remove(0);
+        continue;
+      } else {
+        visitedPixels[currentCoordinate] = true;
+      }
+      
+      pixels[currentCoordinate] = colour; //updates colour of pixel
+      
+      //pixel to the right
+      if ((currentCoordinate + 1) % width+1 <= width && currentCoordinate + 1 < width*height) {
+        if ((pixels[currentCoordinate+1]) == initialColor) {
+          if (!pixelQueue.contains(currentCoordinate+1)) {
+            pixelQueue.add(currentCoordinate + 1);
+          }
+        }
+      }
+      //pixel to the left
+      if (currentCoordinate % width-1 >= width/6) {
+        if (pixels[currentCoordinate-1] == initialColor) {
+          if (!pixelQueue.contains(currentCoordinate-1)) {
+            pixelQueue.add(currentCoordinate-1);
+          }
+        }
+      }
+      
+      //pixel to the top
+      if (currentCoordinate - width >= height/6) {
+        if ((pixels[currentCoordinate - width]) == initialColor) {
+          if (!pixelQueue.contains(currentCoordinate-width)) {
+            pixelQueue.add(currentCoordinate-width);
+          }
+        }
+      }
+      //pixel to the bottom
+      if (currentCoordinate + width < width*height) {
+        if ((pixels[currentCoordinate+width]) == initialColor) {
+          if (!pixelQueue.contains(currentCoordinate+width)) {
+            pixelQueue.add(currentCoordinate+width);
+          }
+        }
+      }
+      pixelQueue.remove(0);
+    }
+    updatePixels();
   }
   /**
    * Switches brush to erase
@@ -46,7 +106,7 @@ public class PaintBrush {
    */
   //updates the thickness or size of the brush
   void changeWeight(float weight) {
-   size = weight;
+    size = weight;
   }
   /*
    * Updates the colour of the brush

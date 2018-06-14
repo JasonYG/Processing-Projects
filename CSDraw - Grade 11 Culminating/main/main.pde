@@ -59,12 +59,11 @@ void mousePressed() {
         switchBrush = 0;
       }
     }
-    //changes to square brush
+    //changes to paint bucket
     if (mouseButton == LEFT && switchBrush != 2) {
       if (mouseX > menu.menuX*0.3 && mouseX < menu.menuX*0.7 && 
         mouseY > menu.menuY/2 && mouseY < (menu.menuY/2) + (menu.menuX*0.4)) {
         switchBrush = 2;
-        //  rect(menu.menuX*0.3, menu.menuY/2, menu.menuX*0.4, menu.menuX*0.4
       }
     }
     //clear screen
@@ -99,10 +98,10 @@ void mouseDragged() {
         mouseX > menu.menuX) {
         brush.circleDisplay();
       }
-      //square brush
+      //bucket tool
       if (mouseButton == LEFT && screen == 1 && switchBrush == 2 && 
         mouseX > menu.menuX) {
-        brush.squareDisplay();
+        brush.bucketDisplay();
       }
       //eraser
       if (mouseButton == LEFT && switchBrush == 1 && mouseX > menu.menuX) {
