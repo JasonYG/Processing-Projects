@@ -1,15 +1,20 @@
+/*
+ * Author: Jason Guo
+ * Revision Date: June 14, 2018
+ * Program Name: CSDraw - Culminating Activity (ICS3U)
+ * Program Description:
+ *         Program developed to build on my knowledge of programming concepts from Grade 10.
+ */
 int screen = 0;
 PImage openingScreen;
 
 PaintBrush brush; //with default brush properties
 GameInterface menu; //displays game's menu
-int switchBrush = 0; //brush 0 is the regular round brush
 
 float currentTime;
 
 void settings() {
   fullScreen();
-  //size(50, 50);
 }
 void setup() {
   openingScreen = loadImage("openScreen.png");
@@ -47,28 +52,28 @@ void keyPressed() {
 void mousePressed() {
   if (screen != 0) {
     //changes to eraser
-    if (mouseButton == LEFT && switchBrush != 1) {
+    if (mouseButton == LEFT && menu.switchBrush != 1) {
       if (mouseX > menu.menuX/2 - 95 && mouseX < menu.menuX/2 + 95 && 
         mouseY > menu.menuY/3 && mouseY < menu.menuY/2.5) {
-        switchBrush = 1;
+        menu.switchBrush = 1;
       }
     }
     //changes to brush
-    if (mouseButton == LEFT && switchBrush != 0) {
+    if (mouseButton == LEFT && menu.switchBrush != 0) {
       if (mouseX > menu.menuX*0.2 && mouseX < menu.menuX*0.8 && 
         mouseY > menu.menuY/2.3 && mouseY < (menu.menuY/2.3) + (menu.menuY*0.05)) {
-        switchBrush = 0;
+        menu.switchBrush = 0;
       }
     }
     //changes to paint bucket
-    if (mouseButton == LEFT && switchBrush != 2) {
+    if (mouseButton == LEFT && menu.switchBrush != 2) {
       if (mouseX > menu.menuX*0.3 && mouseX < menu.menuX*0.7 && 
         mouseY > menu.menuY/2 && mouseY < (menu.menuY/2) + (menu.menuX*0.4)) {
-        switchBrush = 2;
+        menu.switchBrush = 2;
       }
     }
     //bucket tool
-    if (mouseButton == LEFT && screen == 1 && switchBrush == 2 && 
+    if (mouseButton == LEFT && screen == 1 && menu.switchBrush == 2 && 
       mouseX > menu.menuX) {
       brush.bucketDisplay();
     }
@@ -100,12 +105,12 @@ void mouseDragged() {
   if (screen != 0) {
     if (mouseY > height/6) {
       //regular brush
-      if (mouseButton == LEFT && screen == 1 && switchBrush == 0 && 
+      if (mouseButton == LEFT && screen == 1 && menu.switchBrush == 0 && 
         mouseX > menu.menuX) {
         brush.circleDisplay();
       }
       //eraser
-      if (mouseButton == LEFT && switchBrush == 1 && mouseX > menu.menuX) {
+      if (mouseButton == LEFT && menu.switchBrush == 1 && mouseX > menu.menuX) {
         brush.erase();
       }
     }

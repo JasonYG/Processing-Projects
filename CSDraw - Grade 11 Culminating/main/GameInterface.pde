@@ -2,11 +2,12 @@
  * This class displays UI of the game
  * 
  * @author Jason Guo
- * @since June 4, 2018
+ * @since June 14, 2018
  * @version 1.0
  */
 public class GameInterface {
   float brushWeight = 35;
+  int switchBrush = 0;
   float menuX, menuY, thicknessX, thicknessY, redX, redY, redR, redValue, 
     greenX, greenY, greenR, greenValue, blueX, blueY, blueR, blueValue, opacityX, 
     opacityY, opacityR, opacityValue;
@@ -24,16 +25,16 @@ public class GameInterface {
 
     redX = menuX*0.1;
     redY = menuY/6;
-    redR = brushWeight - 2;
+    redR = 33;
     redValue = 0;
 
     greenX = menuX*0.1;
     greenY = 1.25*menuY/6;
-    greenR = brushWeight - 2;
+    greenR = 33;
     greenValue = 0;
 
     blueX = menuX*0.1;
-    blueR = brushWeight - 2;
+    blueR = 33;
     blueY = greenY + blueR + 10;
     blueValue = 0;
 
@@ -163,18 +164,24 @@ public class GameInterface {
    * Resets the sliders back to their original position
    */
   void resetSliders() {
+    brushWeight = 35;
+    switchBrush = 0;
+    
+    thicknessX = (menuX*0.1 + menuX*0.9)/2;
+    thicknessY = menuY/16;
+    
     redX = menuX*0.1;
     redY = menuY/6;
-    redR = brushWeight - 2;
+    redR = 33;
     redValue = 0;
 
     greenX = menuX*0.1;
     greenY = 1.25*menuY/6;
-    greenR = brushWeight - 2;
+    greenR = 33;
     greenValue = 0;
 
     blueX = menuX*0.1;
-    blueR = brushWeight - 2;
+    blueR = 33;
     blueY = greenY + blueR + 10;
     blueValue = 0;
 
@@ -241,12 +248,11 @@ public class GameInterface {
     if (screen == 2) {
       text("Cool sketch", menuX/2, menuY*0.7);
     } else if (switchBrush == 0) {
-      rectMode(CENTER);
-      text("Brush selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+      text("Brush selected", menuX/2, menuY*0.7);
     } else if (switchBrush == 1) {
       text("Eraser selected", menuX/2, menuY*0.7);
     } else if (switchBrush == 2) {
-      text("Bucket tool selected", menuX/2, menuY*0.7, menuX, menuY*0.1);
+      text("Bucket tool selected", menuX/2, menuY*0.7);
     }
   }
   /*

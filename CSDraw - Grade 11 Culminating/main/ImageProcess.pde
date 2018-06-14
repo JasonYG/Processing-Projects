@@ -14,7 +14,7 @@ import java.util.Random;
  * file must be a valid API key for the Google Cloud Vision API.
  *
  * @author Jason Guo
- * @since June 6, 2018
+ * @since June 14, 2018
  * @version 1.0
  */
 public static class ImageProcess {
