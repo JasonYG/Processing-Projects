@@ -66,6 +66,11 @@ void mousePressed() {
         switchBrush = 2;
       }
     }
+    //bucket tool
+    if (mouseButton == LEFT && screen == 1 && switchBrush == 2 && 
+      mouseX > menu.menuX) {
+      brush.bucketDisplay();
+    }
     //clear screen
     if (mouseButton == LEFT) {
       if (mouseX > 0 && mouseX < menu.menuX && 
@@ -78,7 +83,7 @@ void mousePressed() {
       if (mouseX > 0 && mouseX < menu.menuX && 
         mouseY > menu.menuY*0.85 && mouseY < menu.menuY) {
         //saves the picture
-        PImage saveScreen = get(int(menu.menuX)+5, int(height/6), int(width-menu.menuX)-5, int(height-height/6));
+        PImage saveScreen = get(int(menu.menuX)+5, int(height/6)+5, int(width-menu.menuX)-5, int(height-height/6));
         saveScreen.save("sketch.jpg");
         //calls API
         ImageProcess.analyzeImage(ImageProcess.encode(loadBytes("sketch.jpg")), 
@@ -97,11 +102,6 @@ void mouseDragged() {
       if (mouseButton == LEFT && screen == 1 && switchBrush == 0 && 
         mouseX > menu.menuX) {
         brush.circleDisplay();
-      }
-      //bucket tool
-      if (mouseButton == LEFT && screen == 1 && switchBrush == 2 && 
-        mouseX > menu.menuX) {
-        brush.bucketDisplay();
       }
       //eraser
       if (mouseButton == LEFT && switchBrush == 1 && mouseX > menu.menuX) {
