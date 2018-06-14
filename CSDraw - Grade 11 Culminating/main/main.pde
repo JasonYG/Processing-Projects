@@ -41,6 +41,7 @@ void keyPressed() {
   if (screen == 2) {
     screen = 0;
     ImageProcess.score = 0;
+    menu.resetSliders();
   }
 }
 void mousePressed() {

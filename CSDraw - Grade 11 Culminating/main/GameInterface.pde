@@ -55,6 +55,18 @@ public class GameInterface {
     text("Brush", menuX/2, menuY/2.15);
   }
   /*
+   * Displays the bucket tool element of the UI
+   */
+  void bucketTool() {
+    fill(255);
+    stroke(0);
+    rect(menuX*0.3, menuY/2, menuX*0.4, menuX*0.4);
+
+    fill(0);
+    rectMode(CENTER);
+    text("Bucket tool", menuX*0.5, menuY*0.58, menuX*0.4, menuX*0.4);
+  }
+  /*
    * Displays the clear screen element of the UI
    */
   void clearScreen() {
@@ -146,6 +158,30 @@ public class GameInterface {
 
     fill(0);
     text("NEXT DRAWING", menuX/2, menuY*0.92);
+  }
+  /*
+   * Resets the sliders back to their original position
+   */
+  void resetSliders() {
+    redX = menuX*0.1;
+    redY = menuY/6;
+    redR = brushWeight - 2;
+    redValue = 0;
+
+    greenX = menuX*0.1;
+    greenY = 1.25*menuY/6;
+    greenR = brushWeight - 2;
+    greenValue = 0;
+
+    blueX = menuX*0.1;
+    blueR = brushWeight - 2;
+    blueY = greenY + blueR + 10;
+    blueValue = 0;
+
+    opacityX = menuX*0.9;
+    opacityR = blueR;
+    opacityY = blueY + opacityR + 10;
+    opacityValue = 255;
   }
   /*
    * Creates the colour selectors
@@ -257,18 +293,6 @@ public class GameInterface {
       //updates brush's colour (and opacity) value
       brush.changeColour(redValue, greenValue, blueValue, opacityValue);
     }
-  }
-  /*
-   * Displays the bucket tool element of the UI
-   */
-  void bucketTool() {
-    fill(255);
-    stroke(0);
-    rect(menuX*0.3, menuY/2, menuX*0.4, menuX*0.4);
-
-    fill(0);
-    rectMode(CENTER);
-    text("Bucket tool", menuX*0.5, menuY*0.58, menuX*0.4, menuX*0.4);
   }
   /*
    * Creates the thickness slider
