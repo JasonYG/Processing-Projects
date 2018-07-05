@@ -8,5 +8,5 @@ How to Run
 ----
 Processing 3 must be installed to run the program. Simply open any of the _.pde_ files and click the "run" button to start the game. The link to download Processing can be found [here](https://processing.org/download/).
 
-In order for this program to work, there **must be** a text file called "_API_KEY.txt_" in the same directory as the Processing files. This text file must contain a working Google Vision API key.
+In order for this program to work, there **must be** a text file called "_API_KEY.txt_" in the same directory as the Processing files. This text file must contain a working Google Vision API key. You can obtain an API key from [here](https://console.cloud.google.com/).
 
